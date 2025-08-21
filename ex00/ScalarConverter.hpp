@@ -13,6 +13,10 @@ public:
 
 private:
 };
-const char *check_char(const std::string &str);
+void convert_char(const std::string &str);
+// is_char recognice when input is a,b,c,d ./Convert a
+bool is_char(const std::string &str);
+
+void convert_int(const std::string &str);
 
 #endif
