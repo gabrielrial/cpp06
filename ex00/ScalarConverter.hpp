@@ -2,21 +2,26 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <string>
-#include <cctype>
 #include <cstdlib>
+#include <climits>
+#include <cfloat>
+#include <cmath>
 
-class ScalarConverter
-{
+class ScalarConverter {
 public:
-	static void convert(const std::string &str);
+    static void convert(const std::string &literal);
 
 private:
-};
-void convert_char(const std::string &str);
-// is_char recognice when input is a,b,c,d ./Convert a
-bool is_char(const std::string &str);
+    static void convertChar(double value, bool impossible);
+    static void convertInt(double value, bool impossible);
+    static void convertFloat(double value, bool impossible, int precision);
+    static void convertDouble(double value, bool impossible, int precision);
 
-void convert_int(const std::string &str);
+    static bool isPseudoLiteral(const std::string &literal);
+    static int  detectPrecision(const std::string &literal);
+};
 
 #endif
