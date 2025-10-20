@@ -10,15 +10,19 @@ int main()
 	std::cout << "Original Data:" << std::endl;
 	std::cout << "Name: " << data.name << ", Age: " << data.age << std::endl;
 
+	std::cout << std::endl;
+
 	std::cout << "Memory addres data: \n" << &data << std::endl;
 	std::cout << "Memory addres ptr_data: \n" << &ptr_data << std::endl;
 
+	std::cout << std::endl;
 
 	uintptr_t address = Serializer::serialize(&data);
 	std::cout << "Memory addres ptr_address: \n" << &address << std::endl;
 	std::cout << "Memory addres ptr_address: \n" << address << std::endl;
 
-
+	std::cout << std::endl;
+	
 	Data *ptr = Serializer::deserialize(address);
 
 	std::cout << "\nAfter deserialization:" << std::endl;

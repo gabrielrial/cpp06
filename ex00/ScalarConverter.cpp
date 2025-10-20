@@ -2,7 +2,6 @@
 
 void ScalarConverter::convert(const std::string &literal)
 {
-	// Caso: pseudoliterales
 	if (isPseudoLiteral(literal))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -22,7 +21,6 @@ void ScalarConverter::convert(const std::string &literal)
 		return;
 	}
 
-	// Intentar convertir el literal a double
 	char *end;
 	double value = std::strtod(literal.c_str(), &end);
 	bool impossible = (*end != '\0' && !(*end == 'f' && *(end + 1) == '\0'));
@@ -34,8 +32,6 @@ void ScalarConverter::convert(const std::string &literal)
 	convertFloat(value, impossible, precision);
 	convertDouble(value, impossible, precision);
 }
-
-// ----------------------- Conversiones -----------------------------
 
 void ScalarConverter::convertChar(double value, bool impossible)
 {
@@ -82,7 +78,6 @@ void ScalarConverter::convertDouble(double value, bool impossible, int precision
 	}
 }
 
-// ----------------------- Helpers -----------------------------
 
 bool ScalarConverter::isPseudoLiteral(const std::string &literal)
 {
@@ -91,12 +86,11 @@ bool ScalarConverter::isPseudoLiteral(const std::string &literal)
 			literal == "+inff" || literal == "-inff");
 }
 
-// Detectar cuántos decimales imprimir
 int ScalarConverter::detectPrecision(const std::string &literal)
 {
 	size_t dot = literal.find('.');
 	if (dot == std::string::npos)
-		return 1; // no hay punto → imprimir ".0"
+		return 1;
 
 	size_t end = literal.find_first_not_of("0123456789", dot + 1);
 	if (end == std::string::npos)
