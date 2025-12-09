@@ -20,10 +20,15 @@ void ScalarConverter::convert(const std::string &literal)
 		}
 		return;
 	}
-
 	char *end;
 	double value = std::strtod(literal.c_str(), &end);
 	bool impossible = (*end != '\0' && !(*end == 'f' && *(end + 1) == '\0'));
+
+	if (value == 0 && literal.size() == 1)
+	{
+		impossible = false;
+		value = *end + 0;
+	}
 
 	int precision = detectPrecision(literal);
 
