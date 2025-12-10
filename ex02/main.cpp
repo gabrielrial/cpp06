@@ -1,14 +1,14 @@
-#include "Identify.hpp"
+#include "Base.hpp"
 
 int main(void)
 {
-	Base *ptr = generate();
+	Base *ptr = Base::generate();
 	
 	std::cout << "Identify with pointer: ";
-	identify(ptr);
+	Base::identify(ptr);
 
 	std::cout << "Identify with reference: ";
-	identify(*ptr);
+	Base::identify(*ptr);
 
 	delete ptr;
 	return 0;

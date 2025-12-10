@@ -4,7 +4,7 @@ CPP = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Identify.cpp Base.cpp
+SRC = main.cpp Base.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
