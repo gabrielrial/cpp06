@@ -9,19 +9,40 @@
 #include <climits>
 #include <cfloat>
 #include <cmath>
+#include <cstring>
 
-class ScalarConverter {
+
+enum Type {
+    PSEUDO_LITERAL = 0,
+    CHAR = 1,
+    INT = 2,
+	FLOAT = 3,
+	DOUBLE = 4
+};
+
+class ScalarConverter
+{
 public:
-    static void convert(const std::string &literal);
+	static void convert(const char *arg);
 
 private:
-    static void convertChar(double value, bool impossible);
-    static void convertInt(double value, bool impossible);
-    static void convertFloat(double value, bool impossible, int precision);
-    static void convertDouble(double value, bool impossible, int precision);
-
-    static bool isPseudoLiteral(const std::string &literal);
-    static int  detectPrecision(const std::string &literal);
+	ScalarConverter();
+	~ScalarConverter(void);
+	ScalarConverter(ScalarConverter const &other);
+	ScalarConverter &operator=(ScalarConverter const &other);
 };
+
+void convertChar(std::string arg);
+void convertInt(std::string arg);
+void convertFloat(std::string arg);
+void convertDouble(std::string arg);
+
+bool isChar(const char *arg);
+bool isInt(const char *arg);
+
+void printPseudo(const std::string &str);
+
+bool isPseudoLiteral(const char *arg);
+int detectPrecision(const std::string &literal);
 
 #endif
