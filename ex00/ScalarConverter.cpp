@@ -77,7 +77,7 @@ void convertChar(std::string str)
 		std::cout << "'" << static_cast<char>(str[0]) << "'" << std::endl;
 
 	std::cout << "int: " << static_cast<int>(str[0]) << std::endl;
-	std::cout << std::fixed << std::setprecision(1); // <- importante
+	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << static_cast<float>(str[0]) << 'f' << std::endl;
 	std::cout << "double: " << static_cast<double>(str[0]) << std::endl;
 }
@@ -94,47 +94,66 @@ void convertInt(std::string arg)
 	else
 		std::cout << "'" << static_cast<char>(i) << "'" << std::endl;
 
-	
 	std::cout << "int: " << i << std::endl;
-	std::cout << std::fixed << std::setprecision(1); // <- importante
+	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << static_cast<float>(i) << 'f' << std::endl;
 	std::cout << "double: " << static_cast<double>(i) << std::endl;
 }
 
 void convertFloat(std::string arg)
 {
-	std::cout << "char: ";
-    float f = atof(arg.c_str());
+    float f = strtof(arg.c_str(), NULL);
 
+    std::cout << "char: ";
     if (f < 0 || f > 127 || std::isnan(f))
         std::cout << "impossible" << std::endl;
-    else if (!isprint((f)))
+    else if (!isprint(static_cast<unsigned char>(f)))
         std::cout << "Non displayable" << std::endl;
     else
-        std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
+        std::cout << "'" << static_cast<char>(f) << "'" << std::endl;
 
-    std::cout << "int: " << static_cast<int>(f) << std::endl;
-    std::cout << std::fixed << std::setprecision(1); // <- importante
-    std::cout << "float: " << f << 'f' << std::endl;
+    if (f > 2147483647.0 || f < -2147483648.0 || std::isnan(f))
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(f) << std::endl;
+
+    int precision = detectPrecision(arg);
+
+    std::cout << std::fixed << std::setprecision(precision);
+    std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
+
+	//float test = 98765432.123f;
+	//std::cout << "float: " << test << std::endl;
 }
+
 
 void convertDouble(std::string arg)
 {
 	std::cout << "char: ";
-    double d = atof(arg.c_str());
+	double d = atof(arg.c_str());
 
-    if (d < 0 || d > 127 || std::isnan(d))
-        std::cout << "impossible" << std::endl;
-    else if (!isprint((d)))
-        std::cout << "Non displayable" << std::endl;
-    else
-        std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
+	if (d < 0 || d > 127 || std::isnan(d))
+		std::cout << "impossible" << std::endl;
+	else if (!isprint((d)))
+		std::cout << "Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 
-    std::cout << "int: " << static_cast<int>(d) << std::endl;
-    std::cout << std::fixed << std::setprecision(1); // <- importante
-    std::cout << "float: " << static_cast<float>(d) << 'f' << std::endl;
-    std::cout << "double: " << d << std::endl;
+	if (d > 2147483647.0 || d < -2147483648.0)
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(d) << std::endl;
+
+    int precision = detectPrecision(arg);
+
+    std::cout << std::fixed << std::setprecision(precision);
+	if (d > FLT_MAX || d < -FLT_MAX)
+		std::cout << "float: impossible" << std::endl;
+	else
+		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
+
+	std::cout << "double: " << d << std::endl;
 }
 
 bool isPseudoLiteral(const char *arg)

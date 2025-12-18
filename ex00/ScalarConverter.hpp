@@ -10,6 +10,7 @@
 #include <cfloat>
 #include <cmath>
 #include <cstring>
+#include <limits.h>
 
 
 enum Type {
