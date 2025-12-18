@@ -1,5 +1,9 @@
 #include "ScalarConverter.hpp"
 
+ScalarConverter::ScalarConverter() {}
+
+ScalarConverter::~ScalarConverter() {}
+
 int identify_type(const char *arg)
 {
 	if (isPseudoLiteral(arg))
@@ -213,7 +217,7 @@ void ScalarConverter::convert(const char *arg)
 		break;
 	}
 	default:
-		std::cout << "Error: tipo desconocido" << std::endl;
+		std::cout << "Error: unknown type" << std::endl;
 	}
 }
 
