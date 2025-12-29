@@ -4,6 +4,18 @@ ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::~ScalarConverter() {}
 
+ScalarConverter::ScalarConverter(ScalarConverter const &other)
+{
+	*this = other;
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
+{
+	if (this != &other)
+		return *this;
+	return *this;
+}
+
 int identify_type(const char *arg)
 {
 	if (isPseudoLiteral(arg))
@@ -127,7 +139,7 @@ void convertFloat(std::string arg)
     std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
 
-	//float test = 98765432.123f;
+	//float test = 98765432.123;
 	//std::cout << "float: " << test << std::endl;
 }
 

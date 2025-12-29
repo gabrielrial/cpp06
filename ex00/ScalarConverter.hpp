@@ -26,9 +26,9 @@ class ScalarConverter
 public:
 	static void convert(const char *arg);
 
+	~ScalarConverter();
 private:
 	ScalarConverter();
-	~ScalarConverter(void);
 	ScalarConverter(ScalarConverter const &other);
 	ScalarConverter &operator=(ScalarConverter const &other);
 };
